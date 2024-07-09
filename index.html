@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script type="module">
+     const image = document.getElementById("image")
+     const dispositivos = document.getElementById("dispositivos")
+
+     const socket = io('/');
+
+    socket.on("newImage", (data) => {
+        image.src = `data:image/png;base64,${data}`
+    })
+
+    fetch("/dispositivos")
+    .then(res => res.json())
+    .then(res => {
+       res.dispositivos.forEach(element => {
+        dispositivos.innerHTML += `
+            <h1>${element.socket.replace("::ffff:", "")}</h1>
+        `
+       });
+    })
+
+</script>
+<body>
+    <div id="dispositivos">
+
+    </div>
+    <image id="image">
+
+    </image>
+</body>
+
+
+</html>
