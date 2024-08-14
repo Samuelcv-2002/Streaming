@@ -1,11 +1,14 @@
-import serverNode from "./server.js";
+import { server } from "./io.js";
+import {nms} from "./rtmp.js";
 
 async function main() {
     try {
         // Start server
-        serverNode.listen(3000, () => {
+        server.listen(3000, () => {
             console.log(`Server running on port -> ${3000 }`)
         });
+
+        nms.run();
     } catch (error) {
         console.log(error);
     }

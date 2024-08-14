@@ -1,9 +1,16 @@
 import { live_services } from "../dependencies.js"
 
-export default (socket, io) => {
+export default (socket) => {
+     // SON EVENTOS QUE EMITE EL CLIENTE Y COMO VA A ACTUAR NODEJS, EN ESTE CASO ES EL FRONTEND (VUE)
 
-    socket.on("emitir", (data) => live_services.emitir(socket, io, data))
-    socket.on("newDevice", (data) => live_services.newDevice(socket, io, data))
-    socket.on('disconnect', () => live_services.disconnect(socket, io));
+    live_services.ViewerConneted()
+    
 
+
+   /* socket.on("emitir", (data) => live_services.emitir(socket, io, data))*/
+    //socket.on("newDevice", (data) => live_services.newDevice(socket, io, data))
+
+/*
+    socket.on('disconnectStream', (data) => live_services.disconnectStream(data));
+    */
 }
