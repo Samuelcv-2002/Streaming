@@ -1,6 +1,6 @@
-import { live_services } from "../dependencies.js"
+import { live_services } from "../dependencies"
 
-export default (socket) => {
+export default (/*socket : any*/) => {
      // SON EVENTOS QUE EMITE EL CLIENTE Y COMO VA A ACTUAR NODEJS, EN ESTE CASO ES EL FRONTEND (VUE)
 
     live_services.ViewerConneted()

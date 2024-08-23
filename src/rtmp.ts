@@ -1,8 +1,7 @@
-import ffmpegPath from "ffmpeg-static";
 import ffmpeg from "fluent-ffmpeg";
 import NodeMediaServer from "node-media-server";
 import * as fs from 'node:fs';
-import { live_services } from "./socket/live/dependencies.js";
+import { live_services } from "./socket/live/dependencies";
 
 const config = {
   rtmp: {
@@ -38,11 +37,11 @@ const config = {
 export let nms = new NodeMediaServer(config)
 
 
-nms.on('postPublish', async (id, streamPath) => {
+nms.on('postPublish', async (id: string, streamPath: string) => {
 
   const pathFile = `./screenshots/${streamPath.replace("/live/", "")}.png`
 
-  const command = ffmpeg()
+  ffmpeg()
   .input(`./media${streamPath}/index.m3u8`)
   .outputOptions('-ss', '00:00:01') // Salta a 1 segundo
   .outputOptions('-vframes', '1') // Toma 1 cuadro
@@ -58,7 +57,7 @@ nms.on('postPublish', async (id, streamPath) => {
           image: `data:image/png;base64,${image}`
       })
   })
-  .on('error', (err) => {
+  .on('error', (err : any) => {
     console.error('Error capturing screenshot:', err);
   })
   .run()
@@ -66,6 +65,6 @@ nms.on('postPublish', async (id, streamPath) => {
 });
 
 
-nms.on('donePublish', async (id) => {
-  live_services.disconnectStream({id})
+nms.on('donePublish', async (id: string) => {
+  live_services.disconnectStream(id)
 });
