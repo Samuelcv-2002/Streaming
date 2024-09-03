@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import UserServices from "../services/auth.services"
+import HandleErrors from "../../../utils/Handle-Errors";
 
 export default class AuthControllers{
     constructor (
@@ -10,11 +11,10 @@ export default class AuthControllers{
         try {
             const body = req.body;
             const data = await this.user_services.login(body.username, body.pass)
-            res.status(200).json({
-                ...data
-            })
+            res.status(201).json(data)
         } catch (error) {
-            
+            console.log(error)
+            HandleErrors(error, res)
         }
     }
 }

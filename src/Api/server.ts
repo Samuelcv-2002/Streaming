@@ -6,7 +6,7 @@ const app = express()
 const serverNode = createServer(app)
 
 app.use((_req: Request, res: Response, next: NextFunction) => {
-    res.append('Access-Control-Allow-Origin', '*'); // con el * se le dice "con cualquier origen puedo pedir los metodos de abajo"
+    res.append('Access-Control-Allow-Origin', '*');
     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, PATCH');
     res.append('Access-Control-Allow-Headers', 'Content-Type, Authorization, url');
     next();
